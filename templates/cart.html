@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Savat</h1>
+{% if items %}
+  <table class="table">
+    <thead><tr><th>Mahsulot</th><th>Miqdor</th><th>Sub-total</th><th></th></tr></thead>
+    <tbody>
+      {% for it in items %}
+        <tr>
+          <td>{{ it.product.name }}</td>
+          <td>{{ it.qty }}</td>
+          <td>{{ it.subtotal }} $</td>
+          <td>
+            <form method="post" action="{{ url_for('cart_remove', product_id=it.product.id) }}">
+              <button class="btn btn-sm btn-danger">Olib tashlash</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="fw-bold">Jami: {{ total }} $</p>
+  <a href="{{ url_for('checkout') }}" class="btn btn-primary">To‘lovga o‘tish</a>
+{% else %}
+  <p>Savat bo‘sh.</p>
+  <a href="{{ url_for('home') }}" class="btn btn-outline-primary">Mahsulotlarga qaytish</a>
+{% endif %}
+{% endblock %}
+

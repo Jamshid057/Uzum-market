@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="mb-4">Mahsulotlar</h1>
+  <div class="row">
+    {% for p in products %}
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          {% if p.image %}
+            <img src="{{ p.image }}" class="card-img-top" alt="{{ p.name }}">
+          {% else %}
+            <img src="https://via.placeholder.com/400x200?text=Product" class="card-img-top" alt="{{ p.name }}">
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ p.name }}</h5>
+            <p class="card-text">{{ p.description|truncate(80) }}</p>
+            <p class="fw-bold">{{ p.price }} $</p>
+            <div class="mt-auto">
+              <a href="{{ url_for('product_detail', product_id=p.id) }}" class="btn btn-primary">Ko'rish</a>
+              <form action="{{ url_for('cart_add', product_id=p.id) }}" method="post" class="d-inline">
+                <input type="hidden" name="qty" value="1">
+                <button class="btn btn-outline-success">Savatga qo‘shish</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <p>Hech qanday mahsulot topilmadi.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+

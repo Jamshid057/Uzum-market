@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Buyurtma berish</h1>
+<form method="post">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.name.label }} {{ form.name(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.email.label }} {{ form.email(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.address.label }} {{ form.address(class="form-control", rows=3) }}
+  </div>
+  <p class="fw-bold">Jami: {{ total }} $</p>
+  <button class="btn btn-success">Buyurtmani tasdiqlash</button>
+</form>
+{% endblock %}
+
